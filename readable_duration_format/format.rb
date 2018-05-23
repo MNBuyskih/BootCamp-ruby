@@ -1,6 +1,6 @@
 class Format
   def initialize(seconds)
-    @seconds = Integer(seconds)
+    @seconds = seconds.to_i
   end
 
   def format
