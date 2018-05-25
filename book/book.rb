@@ -68,20 +68,20 @@ class Book
     page = []
     pageLength = 0
 
-    # there is a problem with lines
+    text = @text.gsub("\r\n", "\n")
 
-    @text.split.each do |word|
-      if (pageLength + 1 + word.length) > Page::MAX_PAGE_SIZE
-        add_page(page.join(' '))
+    text.split(/(\s)/).each do |word|
+      if (pageLength + word.length) > Page::MAX_PAGE_SIZE
+        add_page(page.join.strip)
         page = []
         pageLength = 0
       end
 
       page << word
-      pageLength += 1 + word.length
+      pageLength += word.length
     end
 
-    add_page(page.join(' '))
+    add_page(page.join.strip)
   end
 
   def add_page(text)
