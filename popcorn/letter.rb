@@ -1,7 +1,6 @@
-require_relative 'word'
-
 class Letter
-  attr_reader :connections, :letter
+  attr_accessor :connections
+  attr_reader :letter
 
   def initialize(letter)
     @letter = letter
@@ -10,16 +9,5 @@ class Letter
 
   def to_s
     @letter
-  end
-
-  def connect(letter)
-    @connections << letter
-  end
-
-  def tails(exclude = [])
-    letters = @connections
-                  .reject {|l| exclude.include? l}
-    .map {|l| l.tails()}
-    Word.new(letters)
   end
 end
