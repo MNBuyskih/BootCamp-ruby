@@ -1,4 +1,3 @@
-def solution(number)
-  list = *(1...number).select { |n| (n % 3).zero? || (n % 5).zero? }
-  list.inject(0, :+)
+def multiples_3_5(number)
+  (1...number).select { |n| n % 3 == 0 || n % 5 == 0 }.inject(:+)
 end
