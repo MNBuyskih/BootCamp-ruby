@@ -1,19 +1,16 @@
 require_relative '../popcorn'
 require_relative '../letter'
 
-describe 'Popcorn' do
-  popcorn = nil
-
-  before do
-    L = Letter
-    a = L.new('a')
-    b = L.new('b')
-    c = L.new('c')
+describe Popcorn do
+  let(:popcorn) do
+    a = Letter.new('a')
+    b = Letter.new('b')
+    c = Letter.new('c')
     a.connections = [b]
     b.connections = [c, a]
     c.connections = [a]
 
-    popcorn = Popcorn.new([a, b, c], %w[abc ba])
+    Popcorn.new([a, b, c], %w[abc ba])
   end
 
   it 'should return list of words' do

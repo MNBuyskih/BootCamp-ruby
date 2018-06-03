@@ -12,16 +12,16 @@ class Popcorn
 
   private
 
-  def is_word?(word)
+  def valid_word?(word)
     @vocabulary.include? word
   end
 
-  def build(word, words = [])
-    word_ = word.join
-    words << word_ if is_word? word_
-    word.last.connections
-        .reject { |l| word.include? l }
-        .each { |l| build([*word, l], words) }
+  def build(letters, words = [])
+    word = letters.join
+    words << word if valid_word? word
+    letters.last.connections
+      .reject { |l| letters.include? l }
+      .each { |l| build([*letters, l], words) }
     words
   end
 end
