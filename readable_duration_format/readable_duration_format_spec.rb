@@ -1,7 +1,7 @@
 require 'rspec'
 require_relative 'readable_duration_format'
 
-describe 'Format' do
+describe Format do
   describe 'plural' do
     it 'one' do
       formatter = Format.new(1)

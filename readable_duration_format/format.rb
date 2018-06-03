@@ -6,7 +6,7 @@ class Format
   def format
     return 'now' if @seconds.zero?
 
-    list = [year, days, hours, minutes, seconds].reject { |d| d.to_s.empty? }
+    list = [years, days, hours, minutes, seconds].reject { |d| d.to_s.empty? }
     return list[0] if list.length == 1
 
     last = list.pop
@@ -15,36 +15,36 @@ class Format
 
   private
 
-  def year
-    calc 365 * 24 * 60 * 60, 'year'
+  def years
+    compute! 365 * 24 * 60 * 60, 'year'
   end
 
   def days
-    calc 24 * 60 * 60, 'day'
+    compute! 24 * 60 * 60, 'day'
   end
 
   def hours
-    calc 60 * 60, 'hour'
+    compute! 60 * 60, 'hour'
   end
 
   def minutes
-    calc 60, 'minute'
+    compute! 60, 'minute'
   end
 
   def seconds
     plural(@seconds, 'second') if @seconds > 0
   end
 
-  def calc(per_one, word, words = "#{word}s")
-    return nil if @seconds < per_one
+  def compute!(count, singular)
+    return if @seconds < count
 
-    period = @seconds / per_one
-    @seconds = @seconds % per_one
-    plural(period, word, words)
+    period = @seconds / count
+    @seconds = @seconds % count
+    plural(period, singular)
   end
 
-  def plural(num, word, words = "#{word}s")
-    w = num == 1 ? word : words
-    "#{num} #{w}"
+  def plural(count, singular)
+    word = count == 1 ? singular : "#{singular}s"
+    "#{count} #{word}"
   end
 end
