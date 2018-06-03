@@ -1,8 +1,8 @@
 require 'rspec'
 require_relative 'sudoku'
 
-describe 'Sudoku' do
-  it 'done' do
+describe Sudoku do
+  it '#done_or_not?' do
     expect(Sudoku.new([
                           [5, 3, 4, 6, 7, 8, 9, 1, 2],
                           [6, 7, 2, 1, 9, 5, 3, 4, 8],
